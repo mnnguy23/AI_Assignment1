@@ -10,7 +10,7 @@
 class Mutation
 {
 	public:
-		void generateMutation(std::vector < std::vector <int> > &population);
+		std::vector < std::vector <int> > generateMutation(std::vector < std::vector <int> > population);
 		int getMutationX();
 		int getMutationY();
 	private:
