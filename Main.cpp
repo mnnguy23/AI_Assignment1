@@ -1,4 +1,4 @@
-#include "Genetic.h"
+#include "Genetic/Genetic.h"
 
 using namespace std;
 
