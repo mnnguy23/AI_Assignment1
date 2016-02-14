@@ -10,7 +10,7 @@ int main()
 	population.createInitialPopulation(p);
 	population.printPopulation(p);
 
-	mutation.generateMutation(p);
+	p = mutation.generateMutation(p);
 	population.printPopulation(p);
 
 	return (0); 
