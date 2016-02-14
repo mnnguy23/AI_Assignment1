@@ -9,7 +9,7 @@
 class Genetic {
 
   public:
-    void createInitialPopulation();
+    std::vector< std::vector<int> > createInitialPopulation();
     
   private:
     std::vector < std::vector <int> > chromosomePopulation;

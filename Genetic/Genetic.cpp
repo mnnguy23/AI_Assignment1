@@ -1,6 +1,6 @@
 #include "Genetic.h"
 
-void Genetic::createInitialPopulation() {
+std::vector<std::vector<int> > Genetic::createInitialPopulation() {
   int m = 20, n = 10;
   
   chromosomePopulation.resize(m);
@@ -21,4 +21,5 @@ void Genetic::createInitialPopulation() {
     }
     std::cout << std::endl;
   }
+  return chromosomePopulation;
 }
