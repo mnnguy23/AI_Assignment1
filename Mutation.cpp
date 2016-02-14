@@ -6,7 +6,7 @@
 	If 0 -> 1
 */
 	
-void Mutation::generateMutation(std::vector < std::vector <int> > &population)
+std::vector < std::vector <int> > Mutation::generateMutation(std::vector < std::vector <int> > population)
 {
 	int n = 10;
 	int m = 20;
@@ -32,21 +32,11 @@ void Mutation::generateMutation(std::vector < std::vector <int> > &population)
 	}
 	population[mutationX][mutationY] = newValue;
 	
-	
 	//Displays what value was swapped and what it was swapped to.
 	std::cout<<"Original value: "<<originalValue<<"\n";
 	std::cout<<"New value: "<<newValue<<"\n";
 	
-	/*for( int i = 0; i < m; i++)
-	{
-		std::cout<<i<<": ";
-		for (int j = 0; j <10; j++)
-		{
-			std::cout<<population[i][j];
-		}
-		std::cout<<"\n";
-	}*/
-	
+	return population;
 }
 
 int Mutation::getMutationX()
