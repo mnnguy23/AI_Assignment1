@@ -12,7 +12,7 @@ std::vector<int> CrossOver::crossoverSelection(int crossOverRate) {
   return shuffler;
 }
 
-void CrossOver::crossOver (std::vector< std::vector<int> > population, std::vector<int> crossOverselector) {
+std::vector< std::vector<int> > CrossOver::crossOver (std::vector< std::vector<int> > population, std::vector<int> crossOverselector) {
   int m = 20, n = 10;
   
   newPopulation.resize(m);
@@ -42,6 +42,7 @@ void CrossOver::crossOver (std::vector< std::vector<int> > population, std::vect
     }
     std::cout << std::endl;
   }
+  return newPopulation;
 }
 
 std::vector< std::vector<int> > CrossOver::crossoverMask(std::vector< std::vector<int> > population, std::vector<int> parentSelection) {
