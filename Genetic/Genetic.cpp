@@ -21,5 +21,6 @@ std::vector<std::vector<int> > Genetic::createInitialPopulation() {
     }
     std::cout << std::endl;
   }
+  std::cout << std::endl;
   return chromosomePopulation;
 }

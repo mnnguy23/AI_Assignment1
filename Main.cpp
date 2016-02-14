@@ -7,7 +7,7 @@ int main() {
   Genetic population;
   CrossOver crossoverPopulation;
   std::vector <std::vector<int> > initialPopulation = population.createInitialPopulation();
-  crossoverPopulation.crossOver(initialPopulation, 7);
-  
+  std::vector<int> parentSelection = crossoverPopulation.crossoverSelection(7);
+  crossoverPopulation.crossOver(initialPopulation, parentSelection);
   return (0); 
 }
