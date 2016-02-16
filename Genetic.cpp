@@ -84,6 +84,10 @@ void Genetic::findChromosome(std::vector< std::vector<int> > chromosomePopulatio
 			if(chromosomePopulation[i][j] == 1)
 			{
 				count ++;
+				if(count==10 && j == 9)
+				{
+					std::cout<<"chromosome is present \n";
+				}
 			}
 			else if(chromosomePopulation[i][j] != 0)
 			{
@@ -91,8 +95,4 @@ void Genetic::findChromosome(std::vector< std::vector<int> > chromosomePopulatio
 			}
 		}
 	}
-		if(count == 10)
-			std::cout << "Chromosome is present\n";
-		else if(count != 10)
-			std::cout << "Chromosome is not present\n";
 }
