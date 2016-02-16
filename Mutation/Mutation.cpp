@@ -24,11 +24,11 @@ std::vector < std::vector <int> > Mutation::generateMutation(std::vector < std::
 	//Tests the value and swaps accordingly.
 	if (originalValue == 0)
 	{
-		newValue = 1;
+		newValue = 88888;
 	}
 	else if (originalValue == 1)
 	{
-		newValue = 0;
+		newValue = 88888;
 	}
 	population[mutationX][mutationY] = newValue;
 	
