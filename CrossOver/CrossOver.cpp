@@ -1,6 +1,7 @@
 #include "CrossOver.h"
 
 std::vector<int> CrossOver::crossoverSelection(int crossOverRate) {
+ 
   int rate = (20 - (20 - 2*crossOverRate ));
   std::vector<int> shuffler;
   for(int i = 0; i < 20; i++) { shuffler.push_back(i); }
@@ -9,12 +10,12 @@ std::vector<int> CrossOver::crossoverSelection(int crossOverRate) {
     remainingPopulation.push_back(shuffler.front());
     shuffler.erase(shuffler.begin()); 
   }
+  
   return shuffler;
 }
 
 std::vector< std::vector<int> > CrossOver::crossOver (std::vector< std::vector<int> > population, std::vector<int> crossOverselector) {
   int m = 20, n = 10;
-  
   newPopulation.resize(m);
   for(int i =0; i < m; i++) {
     newPopulation[i].resize(n);
@@ -24,6 +25,7 @@ std::vector< std::vector<int> > CrossOver::crossOver (std::vector< std::vector<i
   std::vector<int> crossoverdeletable = crossOverselector;
   std::vector<std::vector<int> > sibling;
   int counter = 0;
+  
   while (crossoverdeletable.size() != 0) {
     parentSelection.push_back(crossoverdeletable.front());
     crossoverdeletable.erase(crossoverdeletable.begin());
@@ -32,10 +34,13 @@ std::vector< std::vector<int> > CrossOver::crossOver (std::vector< std::vector<i
     sibling = CrossOver::crossoverMask(population,parentSelection);
     counter = CrossOver::addToPopulationFromShuffler(counter, sibling);
     parentSelection.erase(parentSelection.begin());
-    parentSelection.erase(parentSelection.begin()); 
+    parentSelection.erase(parentSelection.begin());
+    
   }
-  
+  std::cout << "Still working" << std::endl;
+    std::cout << counter << std::endl;
   CrossOver::addToPopulationFromRemaining(population, counter);
+  std::cout << "Still working" << std::endl;
   for (int i = 0; i < 20; i++) {
     for (int j = 0; j < 10; j++) {
       std::cout << newPopulation[i][j];
@@ -74,10 +79,17 @@ int CrossOver::addToPopulationFromShuffler(int counter, std::vector< std::vector
 }
 
 void CrossOver::addToPopulationFromRemaining(std::vector< std::vector<int> > population, int counter) {
-  for (int i = 0; remainingPopulation.size(); i++) {
+  for (int i = 0; i < remainingPopulation.size(); i++) {
+    for ( int j = 0; j < 10; j++) {
+      std::cout << population[remainingPopulation[i]][j];
+    }
+    std::cout << std::endl;
+  }
+  for (int i = 0; i < remainingPopulation.size(); i++) {
     for(int j = 0; j < 10; j++) {
       newPopulation[counter][j] = population[remainingPopulation[i]][j];
     }
+    counter++;
   }
   for (int i: remainingPopulation) { std::cout << i << std::endl; }
 }
