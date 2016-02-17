@@ -37,16 +37,9 @@ std::vector< std::vector<int> > CrossOver::crossOver (std::vector< std::vector<i
     parentSelection.erase(parentSelection.begin());
     
   }
-  std::cout << "Still working" << std::endl;
-    std::cout << counter << std::endl;
+
   CrossOver::addToPopulationFromRemaining(population, counter);
-  std::cout << "Still working" << std::endl;
-  for (int i = 0; i < 20; i++) {
-    for (int j = 0; j < 10; j++) {
-      std::cout << newPopulation[i][j];
-    }
-    std::cout << std::endl;
-  }
+  
   return newPopulation;
 }
 
@@ -79,17 +72,11 @@ int CrossOver::addToPopulationFromShuffler(int counter, std::vector< std::vector
 }
 
 void CrossOver::addToPopulationFromRemaining(std::vector< std::vector<int> > population, int counter) {
-  for (int i = 0; i < remainingPopulation.size(); i++) {
-    for ( int j = 0; j < 10; j++) {
-      std::cout << population[remainingPopulation[i]][j];
-    }
-    std::cout << std::endl;
-  }
+  
   for (int i = 0; i < remainingPopulation.size(); i++) {
     for(int j = 0; j < 10; j++) {
       newPopulation[counter][j] = population[remainingPopulation[i]][j];
     }
     counter++;
   }
-  for (int i: remainingPopulation) { std::cout << i << std::endl; }
 }

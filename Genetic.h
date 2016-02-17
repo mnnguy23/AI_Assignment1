@@ -4,6 +4,7 @@
 #include <ctime>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -12,5 +13,6 @@ class Genetic {
 	public:
 		void createInitialPopulation(std::vector< std::vector<int> > &chromosomePopulation);
 		void printPopulation(std::vector< std::vector<int> > &chromosomePopulation);
+    void printToFile(std::vector<std::vector<int> &chromosomePopulation);
 	};
 #endif
