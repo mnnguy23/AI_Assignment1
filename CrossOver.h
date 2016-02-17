@@ -19,5 +19,6 @@ class CrossOver
 	private:
 		std::vector< std::vector<int> > newPopulation;
 		std::vector<int> remainingPopulation;
+    std::vector<int> shuffler;
 };
 #endif

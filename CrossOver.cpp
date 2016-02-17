@@ -6,8 +6,6 @@ std::vector<int> CrossOver::crossoverSelection(int crossOverRate)
 	
 	int rate = (20 - (20 - 2*crossOverRate ));
 	
-	std::vector<int> shuffler;
-	
 	for(int i = 0; i < 20; i++)
 	{ 
 		shuffler.push_back(i); 
@@ -133,4 +131,5 @@ void CrossOver::addToPopulationFromRemaining(std::vector< std::vector<int> > pop
 void CrossOver::clearPopulation() {
   newPopulation.clear();
   remainingPopulation.clear();
+  shuffler.clear();
 }
