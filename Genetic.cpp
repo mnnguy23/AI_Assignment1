@@ -111,10 +111,25 @@ Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
  
  outfile.open("test.txt", std::ios_base::app);
  for( int i = 0; i < 20; i++) {
+   outfile<<i<<": ";
    for( int j = 0; j < 10; j++) {
       outfile << chromosomePopulation[i][j];
     }
     outfile << std::endl;
   }
-  outfile.close 
+  outfile.close() ;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
