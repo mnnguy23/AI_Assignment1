@@ -18,7 +18,7 @@ std::vector < std::vector <int> > Mutation::generateMutation(std::vector < std::
 	mutationY = rand()%n;
 	
 	//Displays where the mutation occured.
-	std::cout<<"Mutation (Row, Column): ("<<mutationX<<", "<<mutationY<<")"<<"\n";
+	//std::cout<<"Mutation (Row, Column): ("<<mutationX<<", "<<mutationY<<")"<<"\n";
 	originalValue = population[mutationX][mutationY];
 	
 	//Tests the value and swaps accordingly.
@@ -33,8 +33,8 @@ std::vector < std::vector <int> > Mutation::generateMutation(std::vector < std::
 	population[mutationX][mutationY] = newValue;
 	
 	//Displays what value was swapped and what it was swapped to.
-	std::cout<<"Original value: "<<originalValue<<"\n";
-	std::cout<<"New value: "<<newValue<<"\n";
+	//std::cout<<"Original value: "<<originalValue<<"\n";
+	//std::cout<<"New value: "<<newValue<<"\n";
 	
 	return population;
 }
