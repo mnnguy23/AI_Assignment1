@@ -107,7 +107,9 @@ void Genetic::printPopulation(std::vector< std::vector<int> > &chromosomePopulat
 }
 
 Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
- std::ofstream outfile( "test.txt");
+ std::ofstream outfile;
+ 
+ outfile.open("test.txt", std::ios_base::app);
  for( int i = 0; i < 20; i++) {
    for( int j = 0; j < 10; j++) {
       outfile << chromosomePopulation[i][j];
