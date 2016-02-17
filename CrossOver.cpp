@@ -2,7 +2,7 @@
 
 std::vector<int> CrossOver::crossoverSelection(int crossOverRate)
 {
-	srand(time(0));
+	
 	
 	int rate = (20 - (20 - 2*crossOverRate ));
 	
@@ -133,3 +133,13 @@ void CrossOver::clearPopulation() {
   remainingPopulation.clear();
   shuffler.clear();
 }
+
+
+
+
+
+
+
+
+
+
