@@ -1,111 +1,199 @@
 #include "Genetic.h"
+#include "Mutation.h"
+#include "CrossOver.h"
 
-void Genetic::createInitialPopulation(std::vector< std::vector<int> > &chromosomePopulation)
+int main()
 {
-	int m = 20, n = 10;
+	//ofstream fout;
+	//fout.open("Output.txt");
+	
+	int sMax = 0, zMax = 0;
+	int i = 0;
+	int sum = 0;
+	int numGen = 0;
+	int crossOverRate[] =  {7, 3, 5, 9, 0};
+	int numGenPerRun [20];
+	
+	bool chromosomeFound = false;
+	
+	double avgNumGenPerPCO[5];
+	
+	std::vector < std::vector <int> > p, initialP;
+	std::vector < std::vector <int> > secondLastP;
+	std::vector<int> rate;
+	
+	Genetic population;
+	Mutation mutation;
+	CrossOver cross;
+	
+	population.createInitialPopulation(p);
+	initialP = p;
+	
+	
+	//Loop for # of trials
+	for(int w = 0; w < 5; w++)
+	{	
+		rate = cross.crossoverSelection(7);
+		numGen = 0;
+		p = initialP;
+		chromosomeFound = false;
 
-	chromosomePopulation.resize(m);
-
-	for(int i =0; i < m; i++)
-	{
-		chromosomePopulation[i].resize(n);
-	}
-
-	for( int i = 0; i < m; i++)
-	{
-		//std::cout<<i<<": ";
-		for( int j = 0; j < n; j++) 
-	{
-		int dna = rand() % 2;
-		//std::cout<<dna;
-		chromosomePopulation[i][j] = dna;
-	}
-		//std::cout<<"\n";
-	}
-
-}
-/*
-	Calculate fitness value of each chromosome.
-*/
-void Genetic::geneCount(std::vector< std:: vector<int> > chromosomePopulation)
-{
-	int m = 20, n = 10;
-	int b = 20;
-	int count[20];
-
-	for(int a = 0; a<b; a++)
-	{
-		count[a] = 0;
-	}
-
-	for(int i = 0; i < m; i++)
-	{		
-		for(int j =0; j<10; j++)
-		{	
-			if(chromosomePopulation[i][j] == 1)
-			{
-				count[i]++;
-			}
-		}
-	}
-
-	for(int c = 0; c < m; c++)
-	{
-		std::cout<<c<<": "<<count[c]<< "\n";
-	}
-}
-
-/*
-	Find chromosome with all 1s
-*/
-bool Genetic::findChromosome(std::vector< std::vector<int> > chromosomePopulation)	
-{
-	int m = 20, n = 10;
-	int count = 0;
-
-	for (int i =0; i <m; i++)
-	{
-		count = 0;
-		for(int j = 0; j<n; j++)
+		std::cout<<"\n"<<"\n=========================\n";
+		std::cout<<"Trial #"<<w<<"\n";
+		std::cout<<"=========================\n";
+		
+		while(chromosomeFound != true)
 		{
-			if(chromosomePopulation[i][j] == 1)
+			std::cout<<"Generation #"<<numGen<<"\n";
+			population.printPopulation(p);
+			if(w == 0)
 			{
-				count ++;
-				
-				if(count==10 && j ==9)
+				if(crossOverRate[0] == 7)
 				{
-					return true;
+					if(sMax < 2)
+					{
+						//std::cout<<"Print to File\n";
+						population.printToFile(p);
+					}
+					sMax++;
+				}
+				if(crossOverRate[0] == 0)
+				{
+					if(zMax < 2)
+					{
+						//std::cout<<"Print to File\n";
+						population.printToFile(p);
+					}
+					zMax++;
 				}
 			}
-			else if(chromosomePopulation[i][j] != 0)
-			{
-				j = 20;
-			}
+			
+			p = cross.crossOver(p, rate);
+			//std::cout<<"Generation #"<<numGen<<" after crossover\n";
+			
+			p = mutation.generateMutation(p);
+			//std::cout<<"Generation #"<<numGen<<" after mutation\n";
+			
+			//population.geneCount(p);
+			chromosomeFound = population.findChromosome(p);
+			numGen++;
 		}
-	}
-	return false;
-}
-
-void Genetic::printPopulation(std::vector< std::vector<int> > &chromosomePopulation)
-{
-	int m = 20, n = 10;
-	int fitnessV = 0;
-	
-	for( int i = 0; i < m; i++)
-	{
-		fitnessV = 0;
 		
-		std::cout<<i<<": ";
-		for (int j = 0; j <10; j++)
-		{
-			//std::cout<<chromosomePopulation[i][j];
-			if(chromosomePopulation[i][j] == 1)
-				fitnessV++;
-		}
-		std::cout<<" | Fitness Value: "<<fitnessV<<"\n";
+		std::cout<<"\nPerfect chromosome found!\n";
+		population.printPopulation(p);
+		std::cout<<"Number of generations: "<<numGen++;
+		numGenPerRun[w] = numGen;
 	}
-}
+	
+	
+	for(int k = 0; k < 5; k++)
+	{
+		sum = numGenPerRun[k] + sum;
+	}
+	
+	avgNumGenPerPCO[i] = sum / 5;
+	std::cout<<"\nAverage number of generations per run at PCO "<<crossOverRate[0]<<" = "<<avgNumGenPerPCO[0];
+	
+	
+	
+	
+	
+	//Loop for every PCO value
+	/*for(i = 0; i< 5; i++)
+	{
+		rate = cross.crossoverSelection(crossOverRate[i]);
+		
+		//Loop for 20 runs at every PCO value
+		for(int j = 0; j < 20; j++)
+		{
+			numGen = 0;
+			population.createInitialPopulation(p);
+			population.printPopulation(p);
+			
+			//Loop until string of ten 1s is found
+			while(chromosomeFound != true)
+			{
+				
+				//Prints first two population of run with pco = 0.7
+				if(crossOverRate[i] == 7)
+				{
+					if(sMax < 2)
+						population.printPopulation(p);
+					sMax++
+				}
+				
+				//Prints first two population of run with pco = 0.0
+				if(crossOverRate[i] == 0)
+				{
+					if(zMax < 2)
+						population.printPopulation(p);
+					zMax++
+				}
+			
+				p = cross.crossOver(p, rate);
+				//std::cout<<"Generation #"<<numGen<<" after crossover\n";
+				//population.printPopulation(p);
+				
+				p = mutation.generateMutation(p);
+				//std::cout<<"Generation #"<<numGen<<" after mutation\n";
+				population.printPopulation(p);
+				
+				//population.geneCount(p);
+				chromosomeFound = population.findChromosome(p);
+				
+				if(chromosomeFound == false)
+					secondLastP = p;
+				numGen++;
+			}
+			
+			std::cout<<"\nPerfect chromosome found!\n";
+			population.printPopulation(p);
+			std::cout<<"Number of generations: "<<numGen++;
+			
+			//Print to file
+			if(crossOverRate[i] == 7)
+			{
+				std::cout<<"Second to last population for pco = .7\n";
+				std::cout<<"=====================================\n";
+				population.printPopulation(secondLastP);
+				
+				std::cout<<"Second to last population for pco = .7\n";
+				std::cout<<"=====================================\n";
+				population.printPopulation(p);
+			}
+			
+			//Print to file
+			if(crossOverRate[i] ==0)
+			{
+				std::cout<<"Second to last population for pco = 0\n";
+				std::cout<<"=====================================\n";
+				population.printPopulation(secondLastP);
+				
+				std::cout<<"Second to last population for pco = 0\n";
+				std::cout<<"=====================================\n";
+				population.printPopulation(p);
+			}
+			
+			numGenPerRun[j] = numGen;
+			numGen = 0;
+			
+		}
+		
+		for(int k = 0; k < 20; k++)
+		{
+			sum = numGenPerRun[k] + sum;
+		}
+		
+		avgNumGenPerPCO[i] = sum / 20;
+		
+	}*/
+	
+	//Do something with avg values
+	//avgNumGenPerRun[];
+	//fout.close();
 
+	return (0); 
+}
 
 
 
