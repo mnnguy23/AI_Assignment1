@@ -129,3 +129,8 @@ void CrossOver::addToPopulationFromRemaining(std::vector< std::vector<int> > pop
 	//for (int i: remainingPopulation)
 	//{ std::cout << i << std::endl; }
 }
+
+void CrossOver::clearPopulation() {
+  newPopulation.clear();
+  remainingPopulation.clear();
+}

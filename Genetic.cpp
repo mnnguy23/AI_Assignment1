@@ -106,7 +106,7 @@ void Genetic::printPopulation(std::vector< std::vector<int> > &chromosomePopulat
 	}
 }
 
-Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
+void Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
  std::ofstream outfile;
  
  outfile.open("test.txt", std::ios_base::app);
@@ -117,11 +117,8 @@ Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
     }
     outfile << std::endl;
   }
-  outfile.close() ;
+  outfile.close();
 }
-
-
-
 
 
 

@@ -13,6 +13,8 @@ class Genetic {
 	public:
 		void createInitialPopulation(std::vector< std::vector<int> > &chromosomePopulation);
 		void printPopulation(std::vector< std::vector<int> > &chromosomePopulation);
-    void printToFile(std::vector<std::vector<int> &chromosomePopulation);
+    void printToFile(std::vector<std::vector<int> >&chromosomePopulation);
+    void geneCount(std::vector< std:: vector<int> > chromosomePopulation);
+    bool findChromosome(std::vector< std::vector<int> > chromosomePopulation);
 	};
 #endif

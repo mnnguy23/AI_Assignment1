@@ -31,7 +31,7 @@ int main()
 	
 	
 	//Loop for # of trials
-	for(int w = 0; w < 5; w++)
+	for(int w = 0; w < 2; w++)
 	{	
 		rate = cross.crossoverSelection(7);
 		numGen = 0;
@@ -66,8 +66,8 @@ int main()
 					}
 					zMax++;
 				}
-			}
-			
+      }
+			std::cout << "Working" << std::endl;
 			p = cross.crossOver(p, rate);
 			//std::cout<<"Generation #"<<numGen<<" after crossover\n";
 			
@@ -83,7 +83,9 @@ int main()
 		population.printPopulation(p);
 		std::cout<<"Number of generations: "<<numGen++;
 		numGenPerRun[w] = numGen;
-	}
+    p.clear();
+    cross.clearPopulation();
+  }
 	
 	
 	for(int k = 0; k < 5; k++)
