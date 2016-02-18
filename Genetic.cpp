@@ -107,18 +107,40 @@ void Genetic::printPopulation(std::vector< std::vector<int> > &chromosomePopulat
 }
 
 void Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) {
- std::ofstream outfile;
- 
- outfile.open("test.txt", std::ios_base::app);
- for( int i = 0; i < 20; i++) {
-   outfile<<i<<": ";
-   for( int j = 0; j < 10; j++) {
-      outfile << chromosomePopulation[i][j];
-    }
-    outfile << std::endl;
-  }
-  outfile.close();
+	int fitnessV = 0;
+	
+	std::ofstream outfile;
+	outfile.open("test.txt", std::ios_base::app);
+	for( int i = 0; i < 20; i++)
+	{
+		fitnessV = 0;
+		
+		outfile<<i<<": ";
+		for(int j = 0; j < 10; j++)
+		{
+			outfile << chromosomePopulation[i][j];
+			if(chromosomePopulation[i][j] == 1)
+				fitnessV++;
+		}
+		outfile <<" | Fitness Value: "<<fitnessV<< std::endl;
+	}
+
+	outfile.close() ;
 }
+
+void Genetic::printData(double avgNumGenPerPCO[], int crossOverRate[])
+{
+	std::ofstream outfile;
+	outfile.open("AverageNumberOfGenerations.txt", std::ios_base::app);
+	for(int i = 0; i<5; i++)
+	{
+		outfile<<"Average number of generations at PCO" <<crossOverRate[i]<<": "<<avgNumGenPerPCO[i]<<"\n";
+	}
+	outfile.close();
+}
+
+
+
 
 
 

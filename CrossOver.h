@@ -15,10 +15,11 @@ class CrossOver
 		std::vector< std::vector<int> > crossoverMask(std::vector< std::vector<int> > population, std::vector<int> parentSelection);
 		int addToPopulationFromShuffler(int counter, std::vector< std::vector<int> > sibling);
 		void addToPopulationFromRemaining(std::vector< std::vector<int> > population, int counter);
-    void clearPopulation();
+		void clearPopulation();
 	private:
 		std::vector< std::vector<int> > newPopulation;
 		std::vector<int> remainingPopulation;
-    std::vector<int> shuffler;
+		std::vector<int> shuffler;
+		
 };
 #endif
