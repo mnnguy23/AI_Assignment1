@@ -8,14 +8,10 @@ int main()
 	
 	int i = 0;
 	int sMax = 0, zMax = 0;
-	int sum = 0;
-	int numGen = 0;
 	int crossOverRate[] =  {7, 3, 5, 9, 0};
-	int numGenPerRun [20];
+	
 	
 	bool chromosomeFound = false;
-	
-	double avgNumGenPerPCO[5];
 	
 	std::vector < std::vector <int> > p, initialP;
 	std::vector < std::vector <int> > secondLastP;
@@ -27,14 +23,18 @@ int main()
 	
 	population.createInitialPopulation(p);
 	initialP = p;
+  double avgNumGenPerPCO[5];
 	
-	for(i = 0; i < 1; i++)
+	for(i = 0; i < 5; i++)
 	{
-		//Loop for # of trials
-		for(int w = 17; w < 20; w++)
+    double avgNumGenPerPCO[5];
+  	int sum = 0;
+  	double numGen = 0;
+    int numGenPerRun [20];
+		for(int w = 0; w < 20; w++)
 		{	
 
-			rate = cross.crossoverSelection(crossOverRate[0]);
+			rate = cross.crossoverSelection(p, crossOverRate[i]);
 			numGen = 0;
 			p = initialP;
 			chromosomeFound = false;
@@ -47,44 +47,41 @@ int main()
 			{
 				std::cout<<"Generation #"<<numGen<<"\n";
 				population.printPopulation(p);
+				
+				secondLastP = p;
+				
+				p = cross.crossOver(p, rate);
+				
+				p = mutation.generateMutation(p);
+        
 				if(w == 0)
 				{
 					if(crossOverRate[0] == 7)
 					{
-						if(sMax < 2)
+						if(sMax < 1)
 						{
-							//std::cout<<"Print to File\n";
+              population.printToFile(secondLastP);
 							population.printToFile(p);
 						}
 						sMax++;
 					}
 					if(crossOverRate[0] == 0)
 					{
-						if(zMax < 2)
+						if(zMax < 1)
 						{
-							//std::cout<<"Print to File\n";
+              population.printToFile(secondLastP);
 							population.printToFile(p);
 						}
 						zMax++;
 					}
 				}
 				
-				secondLastP = p;
-				
-				p = cross.crossOver(p, rate);
-				//std::cout<<"Generation #"<<numGen<<" after crossover\n";
-				
-				p = mutation.generateMutation(p);
-				//std::cout<<"Generation #"<<numGen<<" after mutation\n";
-				
-				//population.geneCount(p);
 				chromosomeFound = population.findChromosome(p);
 				numGen++;
 				
-				
 			}
 			
-			if(w == 18||w==19 && crossOverRate[i] == 7 || crossOverRate[i] == 0)
+			if(w == 0 && (crossOverRate[i] == 7 || crossOverRate[i] == 0))
 			{
 				population.printToFile(secondLastP);
 				population.printToFile(p);
@@ -92,25 +89,25 @@ int main()
 			
 			std::cout<<"\nPerfect chromosome found!\n";
 			population.printPopulation(p);
+      std::cout << "Working" << std::endl;
 			std::cout<<"Number of generations: "<<numGen++;
 			numGenPerRun[w] = numGen;
-			
-			p.clear();
+			population.printNumberOfGeneration(numGen,crossOverRate[i]);
+
 			cross.clearPopulation();
 		}
 		
 		
-		for(int k = 17; k < 20; k++)
+		for(int k = 0; k < 20; k++)
 		{
 			std::cout<<"\nRun "<<k<<": "<<numGenPerRun[k];
 			sum = numGenPerRun[k]+sum;
 		}
 		
 		avgNumGenPerPCO[i] = sum / 20;
-		std::cout<<"\nAverage number of generations per run at PCO "<<crossOverRate[0]<<" = "<<avgNumGenPerPCO[0];
+		std::cout<<"\nAverage number of generations per run at PCO "<<crossOverRate[i]<<" = "<<avgNumGenPerPCO[i];
+    population.printData(avgNumGenPerPCO[i], crossOverRate[i]);
 	}
-	
-	population.printData(avgNumGenPerPCO, crossOverRate);
 
 	return (0); 
 }

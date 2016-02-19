@@ -24,40 +24,7 @@ void Genetic::createInitialPopulation(std::vector< std::vector<int> > &chromosom
 	}
 
 }
-/*
-	Calculate fitness value of each chromosome.
-*/
-void Genetic::geneCount(std::vector< std:: vector<int> > chromosomePopulation)
-{
-	int m = 20, n = 10;
-	int b = 20;
-	int count[20];
 
-	for(int a = 0; a<b; a++)
-	{
-		count[a] = 0;
-	}
-
-	for(int i = 0; i < m; i++)
-	{		
-		for(int j =0; j<10; j++)
-		{	
-			if(chromosomePopulation[i][j] == 1)
-			{
-				count[i]++;
-			}
-		}
-	}
-
-	for(int c = 0; c < m; c++)
-	{
-		std::cout<<c<<": "<<count[c]<< "\n";
-	}
-}
-
-/*
-	Find chromosome with all 1s
-*/
 bool Genetic::findChromosome(std::vector< std::vector<int> > chromosomePopulation)	
 {
 	int m = 20, n = 10;
@@ -124,19 +91,27 @@ void Genetic::printToFile(std::vector<std::vector<int> > &chromosomePopulation) 
 		}
 		outfile <<" | Fitness Value: "<<fitnessV<< std::endl;
 	}
-
+  outfile << std::endl;
 	outfile.close() ;
 }
 
-void Genetic::printData(double avgNumGenPerPCO[], int crossOverRate[])
+void Genetic::printData(double avgNumGenPerPCO, int crossOverRate)
 {
 	std::ofstream outfile;
 	outfile.open("AverageNumberOfGenerations.txt", std::ios_base::app);
-	for(int i = 0; i<5; i++)
-	{
-		outfile<<"Average number of generations at PCO" <<crossOverRate[i]<<": "<<avgNumGenPerPCO[i]<<"\n";
-	}
+
+		outfile<<"Average number of generations at PCO" <<crossOverRate<<": "<<avgNumGenPerPCO<< std::endl;
+
 	outfile.close();
+}
+
+void Genetic::printNumberOfGeneration(int numberOfGeneration, int crossOverRate) {
+  std::ofstream outfile;
+  
+  outfile.open("NumberOfGenerationPerPco.txt", std::ios_base::app);
+  
+  outfile <<"The number of generation: " << numberOfGeneration << " in pCo: " << crossOverRate << std::endl;
+  
 }
 
 
